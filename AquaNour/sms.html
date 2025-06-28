@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aquanour - SMS Webhook</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <header>
+        <h1>Aquanour</h1>
+        <p>Community-Based Water Leak Reporting in Morocco</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="map.html">Live Map</a>
+        <a href="sms.html" class="active">SMS Webhook</a>
+        <a href="reports.html">Reports</a>
+        <a href="analytics.html">Analytics</a>
+        <a href="mobile.html">Mobile</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+
+    <main>
+        <div class="content-box">
+            <h2>SMS Webhook Interface</h2>
+            <p>This page is the designated endpoint for our SMS gateway. It will receive incoming text messages, parse the data, and create new leak reports in the system.</p>
+             <!-- Placeholder for webhook details -->
+            <div style="background-color: #e9ecef; border-radius: 8px; padding: 1.5rem; color: #495057;">
+                <p><strong>Webhook URL:</strong> https://api.aquanour.ma/v1/sms/receive</p>
+                <p><strong>Method:</strong> POST</p>
+                <p><strong>Expected Payload:</strong> JSON object containing 'from', 'timestamp', and 'message' fields.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Aquanour Project. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
