@@ -5,6 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aquanour - Live Map</title>
     <link rel="stylesheet" href="style.css">
+
+    <!-- Leaflet.js CSS File -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+    
+    <!-- Leaflet.js JavaScript File -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+     crossorigin=""></script>
+
+    <!-- Custom styles for the map container -->
+    <style>
+        #leakMap { 
+            height: 500px; 
+            width: 100%;
+            border-radius: 12px;
+            margin-top: 1rem;
+        }
+    </style>
 </head>
 <body>
 
@@ -26,17 +46,41 @@
     <main>
         <div class="content-box">
             <h2>Live Leak Reports Map</h2>
-            <p>This section will feature an interactive map displaying the locations of reported water leaks in real-time. Pins on the map will provide details about each report.</p>
-            <!-- Placeholder for a map -->
-            <div style="width: 100%; height: 450px; background-color: #e9ecef; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: #6c757d;">
-                [Interactive Map Placeholder]
-            </div>
+            <p>This interactive map displays the locations of reported water leaks in real-time. Click on a pin to see more details about a report.</p>
+            
+            <!-- This div is where the map will be rendered -->
+            <div id="leakMap"></div>
         </div>
     </main>
 
     <footer>
         <p>&copy; 2025 Aquanour Project. All rights reserved.</p>
     </footer>
+
+    <script>
+        // 1. Initialize the map and set its view to a central location in Morocco
+        //    Coordinates for Rabat: [34.020882, -6.84165]
+        //    The second argument '10' is the zoom level.
+        const map = L.map('leakMap').setView([34.020882, -6.84165], 7);
+
+        // 2. Add the tile layer - this is the background map image from OpenStreetMap
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // 3. Add an example marker for a leak report
+        //    In a real application, you would load these coordinates from your database.
+        const leakReport1 = L.marker([33.5731, -7.5898]).addTo(map); // Casablanca
+        leakReport1.bindPopup("<b>Leak Report #AQ-002</b><br>Location: Casablanca<br>Status: Resolved");
+
+        const leakReport2 = L.marker([31.6295, -7.9811]).addTo(map); // Marrakech
+        leakReport2.bindPopup("<b>Leak Report #AQ-001</b><br>Location: Marrakech<br>Status: Pending");
+
+        const leakReport3 = L.marker([34.0372, -5.0039]).addTo(map); // Fes
+        leakReport3.bindPopup("<b>Leak Report #AQ-003</b><br>Location: Fes<br>Status: In Progress");
+
+    </script>
 
 </body>
 </html>
