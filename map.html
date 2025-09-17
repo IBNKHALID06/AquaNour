@@ -58,26 +58,48 @@
     </footer>
 
     <script>
-        // 1. Initialize the map and set its view to a central location in Morocco
-        //    Coordinates for Rabat: [34.020882, -6.84165]
-        //    The second argument '10' is the zoom level.
-        const map = L.map('leakMap').setView([34.020882, -6.84165], 7);
+        // Check if Leaflet library is available
+        if (typeof L !== 'undefined') {
+            // 1. Initialize the map and set its view to a central location in Morocco
+            //    Coordinates for Rabat: [34.020882, -6.84165]
+            //    The second argument '10' is the zoom level.
+            const map = L.map('leakMap').setView([34.020882, -6.84165], 7);
 
-        // 2. Add the tile layer - this is the background map image from OpenStreetMap
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
+            // 2. Add the tile layer - this is the background map image from OpenStreetMap
+            L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                maxZoom: 19,
+                attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            }).addTo(map);
 
-        // 3. Add an example marker for a leak report
-        //    In a real application, you would load these coordinates from your database.
-        const leakReport1 = L.marker([33.5731, -7.5898]).addTo(map); // Casablanca
-        leakReport1.bindPopup("<b>Leak Report #AQ-002</b><br>Location: Casablanca<br>Status: Resolved");
+            // 3. Add an example marker for a leak report
+            //    In a real application, you would load these coordinates from your database.
+            const leakReport1 = L.marker([33.5731, -7.5898]).addTo(map); // Casablanca
+            leakReport1.bindPopup("<b>Leak Report #AQ-002</b><br>Location: Casablanca<br>Status: Resolved");
 
-        const leakReport2 = L.marker([31.6295, -7.9811]).addTo(map); // Marrakech
-        leakReport2.bindPopup("<b>Leak Report #AQ-001</b><br>Location: Marrakech<br>Status: Pending");
-
-
+            const leakReport2 = L.marker([31.6295, -7.9811]).addTo(map); // Marrakech
+            leakReport2.bindPopup("<b>Leak Report #AQ-001</b><br>Location: Marrakech<br>Status: Pending");
+        } else {
+            // Fallback content when Leaflet library is not available
+            const mapContainer = document.getElementById('leakMap');
+            mapContainer.innerHTML = `
+                <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; background-color: #f8f9fa; border: 2px dashed #dee2e6; color: #6c757d; text-align: center; padding: 2rem;">
+                    <h3 style="margin: 0 0 1rem 0; color: #495057;">Interactive Map Temporarily Unavailable</h3>
+                    <p style="margin: 0 0 1.5rem 0; max-width: 400px;">The map cannot be displayed due to network restrictions. Below are the current leak reports:</p>
+                    <div style="background: #ffffff; border-radius: 8px; padding: 1.5rem; box-shadow: 0 2px 4px rgba(0,0,0,0.1); max-width: 500px; width: 100%;">
+                        <div style="margin-bottom: 1rem; padding: 1rem; border-left: 4px solid #dc3545; background-color: #f8d7da;">
+                            <strong>Leak Report #AQ-001</strong><br>
+                            Location: Marrakech<br>
+                            Status: <span style="color: #856404;">Pending</span>
+                        </div>
+                        <div style="margin-bottom: 0; padding: 1rem; border-left: 4px solid #28a745; background-color: #d4edda;">
+                            <strong>Leak Report #AQ-002</strong><br>
+                            Location: Casablanca<br>
+                            Status: <span style="color: #155724;">Resolved</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
     </script>
 
 </body>
